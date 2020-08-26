@@ -10,9 +10,46 @@
 </head>
 
 <body>
-  
+  <div class="container">
+    <div class = "jumbotron">
+      <h1>Pig Dice!</h1>
+      <p>Pig Dice info</p>
+   </div>
+   <button type="button" class="btn btn-outline-primary" id="newGameButton">New Game</button>
+   <button type="button" class="btn btn-outline-primary" id="settingsButton">Settings</button>
+    <form class="form" id="addPlayerForm">
+      <div class="form-group">
+        <label for="addNewPlayer">Add Player</label>
+        <input type="text" class="form-control" id="addNewPlayer">
+      </div>
+      <button type="submit" class="btn btn-outline-primary">Add Player</button>
+    </form>
+    <div class="row">
+      <div class="col-6">
+        <div class="card">
+          <div class="card-header">
+            <h2 id="currentPlayer"></h2>
 
-
+          </div>
+          <div class="card-body" id="currentPlayerTurn">
+            <img id="diceImg" src="">
+            <p>Current Turn Total: <span id="playerTurnScore"></span></p>
+            <p>Total Score: <span id="playerTotalScore"></span></p>
+            <button id="rollButton" type="button" class="btn btn-danger">Roll</button>
+            <button id='holdButton' type="button" class="btn btn-warning">Hold</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card">
+          <div class="card-body">
+            <ul id="playerScoreList"></ul>
+          </div>
+        </div>
+      
+      </div>
+      </div>
+    </div>
   </div>
 </body>
 
