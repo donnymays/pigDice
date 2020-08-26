@@ -9,6 +9,7 @@ form{
 h1, p{
   color: #3c3d47;
 }
+
 .jumbotron{
   margin-top: 50px;
   text-align: center;
@@ -29,6 +30,10 @@ background-color: #f9d5bb;
   color:#3c3d47;
   text-align: center;
   display: none;
+}
+
+#diceDiv{
+  text-align: center;
 }
 
 #gameScoresCard{
@@ -81,10 +86,23 @@ background-color: #f9d5bb;
 
 #addNewPlayerLabel{
   color:#f66767;
-  
-  
+}
+
+#deleteButton{
+  margin-top:10px;
 }
 #setup{
   display: none;
+}
+
+.custom-select{
+  background-color: #ece9e4;
+}
+
+.form-control{
+  appearance: none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  background-color: #ece9e4; 
 }
 

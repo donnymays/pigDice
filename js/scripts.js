@@ -86,9 +86,12 @@ function updatePlayerListScore (dom) {
 }
 function updateDropdown (dom) {
   dom.text('');
+  // for(let i = 0; i < GAME.playerCount; i++) {
+  //    dom.append('<option value="' + i + '">' + GAME.players[i].name + '</option>');
+  // }
   for(let i = 0; i < GAME.playerCount; i++) {
-     dom.append('<option value="' + i + '">' + GAME.players[i].name + '</option>');
-  }
+    dom.append('<option value="' + i + '">' + GAME.players[i].name + '</option>');
+ }
 }
 
 function displayCurrentPlayerTurn () {
@@ -109,6 +112,20 @@ function displayCurrentPlayerTurn () {
 //<span id="playerTurnScore"></span>
 //<span id="playerTotalScore"></span>
 }
+
+function swapColor () {
+  let cLBack = $('#currentPlayerTurn').css('background-color');
+  let cLText = $('#currentPlayerTurn').css('color');
+  let cRBack = $('#gameScoresCard').css('background-color');
+  let cRText = $('#gameScoresCard').css('color');
+  
+  $('#currentPlayerTurn').css('background-color', cRBack);
+  $('#currentPlayerTurn').css('color', cRText);
+  $('#gameScoresCard').css('background-color', cLBack);
+  $('#gameScoresCard').css('color', cLText);
+}
+
+
 
 $(document).ready(function () {
   $('#holdButton').prop('disabled','true');
@@ -165,7 +182,7 @@ $('#rollButton').click(function () {
   if(GAME.turn()){
     $('#holdButton').prop('disabled',false);
     //alert('test:' + GAME.players[GAME.currentPlayerIndex].totalScore);
-    if(GAME.players[GAME.currentPlayerIndex].totalScore() >= 10) {
+    if(GAME.players[GAME.currentPlayerIndex].totalScore() >= 100) {
       //alert('you won');
      
       $('#winner').text('Congrats ' + GAME.players[GAME.currentPlayerIndex].name + '!');
@@ -179,6 +196,7 @@ $('#rollButton').click(function () {
     }
   }else{
     GAME.nextPlayer();
+    //swapColor();
     $('#holdButton').prop('disabled',true);
     
   }
@@ -188,6 +206,7 @@ $('#rollButton').click(function () {
 $('#holdButton').click(function () {
   GAME.players[GAME.currentPlayerIndex].submitTurnScore();
   GAME.nextPlayer();
+  //swapColor();
   updatePlayerListScore ($('#playerScoreList'));
   displayCurrentPlayerTurn();
   $('#holdButton').prop('disabled',true);

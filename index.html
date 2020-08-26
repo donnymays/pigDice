@@ -20,18 +20,21 @@
     <button type="button" class="btn btn-dark" id="newGameButton">New Game</button>
     <button type="button" class="btn btn-outline-dark" id="settingsButton">Setup</button>
    </div>
-  <div id="setup">
-    <form class="form" id="addPlayerForm">
-      <div class="form-group">
-        <label for="addNewPlayer" id="addNewPlayerLabel">Add Player</label>
-        <input type="text" class="form-control" id="addNewPlayer">
-      </div>
-      <button id="addPlayerButton" type="submit" class="btn btn-outline-dark">Add Player</button>
-    </form>
-    <select name="players" id="playersSelect"></select>
-    <button type='button' class="btn btn-outline-dark" id="deleteButton">Delete Player</button>
-  </div>
-
+    <div id="setup">
+      <form class="form" id="addPlayerForm">
+        <div class="form-group">
+          <label for="addNewPlayer" id="addNewPlayerLabel">Add Player</label>
+          <input type="text" class="form-control" id="addNewPlayer">
+        </div>
+        <button id="addPlayerButton" type="submit" class="btn btn-outline-dark">Add Player</button>
+      </form>
+      <!-- <div class="dropdown-menu" id="playersSelect"></div> -->
+      <select class="custom-select" name="players" id="playersSelect"></select>
+      <button type='button' class="btn btn-outline-dark" id="deleteButton">Delete Player</button>
+    </div>
+    <div id='diceDiv'>
+      <img id="diceImg" src="">
+    </div>
     <div id="gameInfoRow" class="row card-deck">
       <div class="col-6">
         <div class="card" id="currentPlayerCard">
@@ -39,7 +42,7 @@
             <h2 id="currentPlayer"></h2>
           </div>
           <div class="card-body" id="currentPlayerTurn">
-            <img id="diceImg" src="">
+            
             <p>Current Turn Total: <span id="playerTurnScore"></span></p>
             <p>Total Score: <span id="playerTotalScore"></span></p>
             <button id="rollButton" type="button" class="btn btn-dark">Roll</button>
@@ -53,9 +56,7 @@
             <ul id="playerScoreList"></ul>
           </div>
         </div>
-      
       </div>
-
       <div id='results' class="col-12">
         <div id="winnerCard" class="card">
           <div id="winnerCardBody" class="card-body">
@@ -64,12 +65,6 @@
             <ul id="scores"></ul>
           </div>
         </div>
-      
-      </div>
-
-
-
-
       </div>
     </div>
   </div>
