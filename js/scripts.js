@@ -44,6 +44,12 @@ Game.prototype.turn = function () {
   }
 
 }
+Game.prototype.sortPlayersByScore = function () {
+  this.players.sort(function (a,b) {
+    return a.score - b.score;
+  });
+}
+
 
 
 function Player (name) {
@@ -61,6 +67,9 @@ Player.prototype.resetPlayer = function () {
 
 Player.prototype.submitTurnScore = function () {
   this.score += this.turnScore;
+}
+Player.prototype.totalScore = function () {
+  return this.score + this.turnScore;
 }
 //dom = $('#playerScoreList')
 function updatePlayerListScore (dom) {
@@ -87,7 +96,7 @@ function displayCurrentPlayerTurn () {
 }
 
 $(document).ready(function () {
-
+  $('#holdButton').prop('disabled','true');
 $('#settingsButton').click(function () {
   $('#addPlayerForm').toggle();
   $('#addNewPlayer').val('');
@@ -100,12 +109,19 @@ $("#addPlayerForm").submit(function() {
   GAME.addPlayer(new Player(inputtedPlayer));
   updatePlayerListScore ($('#playerScoreList'));
   displayCurrentPlayerTurn();
+  $('#currentPlayerCard').show();
+  $('#gameScoresCard').show();
+  $('#newGameButton').show();
 });
 
 $("#newGameButton").click(function () {
   GAME.resetGame();
+  $('#holdButton').prop('disabled',true);
   updatePlayerListScore ($('#playerScoreList'));
   displayCurrentPlayerTurn();
+  $('#results').hide();
+  $('#gameScoresCard').show();
+  $('#currentPlayerCard').show();
 });
 
 $('#rollButton').click(function () {
@@ -113,11 +129,23 @@ $('#rollButton').click(function () {
   $('#diceImg').attr('src', 'img/red_dice'+ DICE + '.png');
   //display dice
   if(GAME.turn()){
-    // if(GAME.player[GAME.currentPlayerIndex].submitTurnScore >= 100) {
-    //   alert('you won');
-    // }
+    $('#holdButton').prop('disabled',false);
+    //alert('test:' + GAME.players[GAME.currentPlayerIndex].totalScore);
+    if(GAME.players[GAME.currentPlayerIndex].totalScore() >= 10) {
+      //alert('you won');
+     
+      $('#winner').text('Congrats ' + GAME.players[GAME.currentPlayerIndex].name + '!');
+      GAME.players[GAME.currentPlayerIndex].submitTurnScore();
+      //GAME.sortPlayersByScore();
+      updatePlayerListScore ($('#scores'));
+      $('#results').show();
+      $('#gameScoresCard').hide();
+      $('#currentPlayerCard').hide();
+      
+    }
   }else{
     GAME.nextPlayer();
+    $('#holdButton').prop('disabled',true);
     
   }
   updatePlayerListScore ($('#playerScoreList'));
@@ -128,6 +156,7 @@ $('#holdButton').click(function () {
   GAME.nextPlayer();
   updatePlayerListScore ($('#playerScoreList'));
   displayCurrentPlayerTurn();
+  $('#holdButton').prop('disabled',true);
   //$('#holdButton').prop('disabled','true');
 
 });
@@ -135,9 +164,10 @@ $('#holdButton').click(function () {
 
 
 /*
-  hold button should be able to be pressed before rolling/
+  ----hold button shouldnt be able to be pressed before rolling/
   change player background with player change/ add player background property
   functionality for ending game at >= 100
+  delete players/edit players
 */
 
 

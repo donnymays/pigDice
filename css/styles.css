@@ -1,3 +1,82 @@
+body{
+  background-color: #f9d5bb  ;
+}
+
+form{
+  padding-bottom: 50px;
+}
+
+h1, p{
+  color: #3c3d47;
+}
+.jumbotron{
+  margin-top: 50px;
+  text-align: center;
+  background-color: #f66767
+}
+
+
+.container{
+background-color: #f9d5bb;
+}
+
 #addPlayerForm{
   display: none;
 }
+
+#currentPlayerCard{
+  background-color: #d35656;
+  color:#3c3d47;
+  text-align: center;
+  display: none;
+}
+
+#gameScoresCard{
+  background-color: #3c3d47;
+  color: #d35656;
+  display: none;
+
+}
+
+#gameInfoRow{
+  padding-bottom: 75px;
+}
+
+#headerButtons{
+  text-align: center;
+  padding-bottom: 50px;
+}
+
+#newGameButton{
+  display: none;
+}
+
+#results{
+  text-align: center;
+  display: none;
+ 
+}
+
+#pig-icon{
+  width: 100px;
+  height: auto;
+  opacity: .80;
+}
+#winnercard, #winnerCardBody{
+  background-color: #f66767;
+  color: #3c3d47;
+}
+
+#winnercard{
+  border: none;
+}
+
+#scores{
+  list-style-type: none;
+}
+#addNewPlayerLabel{
+  color:#f66767;
+  
+  
+}
+
