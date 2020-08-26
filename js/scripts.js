@@ -50,8 +50,6 @@ Game.prototype.sortPlayersByScore = function () {
   });
 }
 
-
-
 function Player (name) {
   this.name = name;
   this.score = 0;
@@ -74,6 +72,7 @@ Player.prototype.totalScore = function () {
 //dom = $('#playerScoreList')
 function updatePlayerListScore (dom) {
   dom.text('');
+  if(GAME.playerCount > 0){
   for(let i = 0; i < GAME.playerCount; i++) {
     if(i === GAME.currentPlayerIndex) {
       dom.append('<li><strong>' + GAME.players[i].name + ': ' + GAME.players[i].score + '</strong></li>');
@@ -81,15 +80,31 @@ function updatePlayerListScore (dom) {
       dom.append('<li>' + GAME.players[i].name + ': ' + GAME.players[i].score + '</li>');
     }
   }
+}else {
+  dom.text('');
+}
+}
+function updateDropdown (dom) {
+  dom.text('');
+  for(let i = 0; i < GAME.playerCount; i++) {
+     dom.append('<option value="' + i + '">' + GAME.players[i].name + '</option>');
+  }
 }
 
 function displayCurrentPlayerTurn () {
  
  let i = GAME.currentPlayerIndex;
- 
- $('#currentPlayer').text(GAME.players[i].name);
- $("#playerTurnScore").text(GAME.players[i].turnScore);
- $("#playerTotalScore").text(GAME.players[i].score);
+ if(GAME.playerCount === 0)
+ {
+  $('#currentPlayer').text('');
+  $("#playerTurnScore").text('');
+  $("#playerTotalScore").text('');
+ }else{
+  $('#currentPlayer').text(GAME.players[i].name);
+  $("#playerTurnScore").text(GAME.players[i].turnScore);
+  $("#playerTotalScore").text(GAME.players[i].score);
+ }
+
   //h2 #currentplayer
 //<span id="playerTurnScore"></span>
 //<span id="playerTotalScore"></span>
@@ -97,9 +112,22 @@ function displayCurrentPlayerTurn () {
 
 $(document).ready(function () {
   $('#holdButton').prop('disabled','true');
+
 $('#settingsButton').click(function () {
   $('#addPlayerForm').toggle();
   $('#addNewPlayer').val('');
+  $('#setup').toggle();
+});
+
+$('#deleteButton').click(function () {
+  if(GAME.playerCount > 0){
+    let playerDeletedIndex = $('#playersSelect option:selected').val();
+    GAME.players.splice(playerDeletedIndex,1);
+    GAME.playerCount--;
+    updateDropdown($('#playersSelect'));
+    displayCurrentPlayerTurn();
+    updatePlayerListScore ($('#playerScoreList'));
+  }
 });
 
 $("#addPlayerForm").submit(function() {
@@ -107,11 +135,17 @@ $("#addPlayerForm").submit(function() {
   const inputtedPlayer = $("input#addNewPlayer").val();
   $("input#addNewPlayer").val("");
   GAME.addPlayer(new Player(inputtedPlayer));
+  GAME.resetGame();
   updatePlayerListScore ($('#playerScoreList'));
   displayCurrentPlayerTurn();
   $('#currentPlayerCard').show();
   $('#gameScoresCard').show();
   $('#newGameButton').show();
+
+
+  updateDropdown($('#playersSelect'));
+  $('#results').hide();
+
 });
 
 $("#newGameButton").click(function () {

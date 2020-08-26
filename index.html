@@ -20,7 +20,7 @@
     <button type="button" class="btn btn-dark" id="newGameButton">New Game</button>
     <button type="button" class="btn btn-outline-dark" id="settingsButton">Setup</button>
    </div>
-  
+  <div id="setup">
     <form class="form" id="addPlayerForm">
       <div class="form-group">
         <label for="addNewPlayer" id="addNewPlayerLabel">Add Player</label>
@@ -28,6 +28,10 @@
       </div>
       <button id="addPlayerButton" type="submit" class="btn btn-outline-dark">Add Player</button>
     </form>
+    <select name="players" id="playersSelect"></select>
+    <button type='button' class="btn btn-outline-dark" id="deleteButton">Delete Player</button>
+  </div>
+
     <div id="gameInfoRow" class="row card-deck">
       <div class="col-6">
         <div class="card" id="currentPlayerCard">

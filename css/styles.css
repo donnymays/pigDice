@@ -74,9 +74,17 @@ background-color: #f9d5bb;
 #scores{
   list-style-type: none;
 }
+
+#setup{
+  padding-bottom: 50px;
+}
+
 #addNewPlayerLabel{
   color:#f66767;
   
   
+}
+#setup{
+  display: none;
 }
 
